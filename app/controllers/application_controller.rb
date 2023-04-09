@@ -1,20 +1,20 @@
 class ApplicationController < ActionController::Base
   
-  def new
-  @book = Book.new
-  end
-  
-  def create
-    @book = Book.new(user_params)
-    @book.user_id = current_user.id
-    @book.save
-    redirect_to book_path
-  end  
-  
-  private
+  before_action :authenticate_user!, except: [:top]
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def book_params
-    params.require(:book).permit(:tetle, :image, :body)
+  def after_sign_in_path_for(resource)
+    books_path
   end
-  
+
+  def after_sign_out_path_for(resource)
+    about_path
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
+  # meshiterro
 end
