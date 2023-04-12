@@ -9,4 +9,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_one_attached :profile_image
   
+  validates :name, presence: true
+  
+  
 end
