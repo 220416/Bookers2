@@ -3,9 +3,11 @@
   <%= link_to books_path(book.id) do %>
   
   <% end %>
-  <p>Image：<%= book.image %></p>
   <p>Title：<%= book.title %></p>
   <p>Body：<%= book.body %></p>
   <p>ユーザーネーム：<%= book.user.name %></p>
+  
+  <%= link_to "Destroy", book_path(@book), method: :delete %>
+  
   </div>
 <% end %>

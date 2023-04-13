@@ -12,6 +12,16 @@ class BooksController < ApplicationController
       render :new
     end
   end
+  
+  def update
+    @book = Book.find(params[:id])
+    @book.update(user_params)
+    if @book.save
+      redirect_to  books_path(@user)
+    else
+      render :index
+    end
+  end
 
   def index
     @books = Book.all
