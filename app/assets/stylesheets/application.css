@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+* {
+  margin: 0px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*top画面*/
+.btn{
+  display: inline-block;
+}
+
+.btn-color{
+  background-color:#17a2b8;
+  
+}
