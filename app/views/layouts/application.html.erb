@@ -3,6 +3,7 @@
   <head>
     <title>Bookers2</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://kit.fontawesome.com/ec17237aec.js" crossorigin="anonymous"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -17,7 +18,7 @@
         <%= link_to "Bookers", root_path %>
       </li>
       <li>
-        <%= link_to 'Home', user_path(current_user.id) %>
+        <%= link_to 'Home', root_path %>
       </li>
       <li>
         <%= link_to 'Users', user_path(current_user.id) %>
@@ -33,7 +34,7 @@
         <%= link_to "Bookers", root_path %>
       </li>
       <li>
-        <%= link_to "About", about_path %>
+        <%= link_to "About", home_about_path %>
       </li>
       <li>
         <%= link_to "Sign up", new_user_registration_path %>
