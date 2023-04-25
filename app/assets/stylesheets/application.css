@@ -22,20 +22,5 @@
 header{
   display: inline-block;
   text-align: center;
-  float: left;
 }
 /*top画面*/
-
-.top-h1{
-  text-align: center;
-}
-
-.btn{
-}
-
-
-
-.btn-color{
-  background-color:green;
-  color:white;
-}
