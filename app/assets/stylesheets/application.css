@@ -13,14 +13,3 @@
  *= require_tree .
  *= require_self
  */
-* {
-  margin: 0px;
-  padding: 0;
-  
-}
-
-header{
-  display: inline-block;
-  text-align: center;
-}
-/*top画面*/
