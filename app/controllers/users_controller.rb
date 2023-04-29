@@ -1,13 +1,18 @@
 class UsersController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update]
+
   def show
-    @books = Book.all
     @book = Book.new
-    @user = current_user
+    @books = Book.all
+    @user = User.find(params[:id])
+    @users = User.all
   end
 
   def index
+    @books = Book.all
+    @book = Book.new
+    @user = current_user
     @users = User.all
-    @user = User.find(params[:id])
   end
 
   def edit
@@ -16,10 +21,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    if @user.save
-        flash[:notice] = "You have updated user successfully."
-      redirect_to  user_path(@user)
+    if @user.update(user_params)
+      flash[:notice] = "You have updated user successfully."
+      redirect_to  user_path(current_user.id)
     else
       render :edit
     end
@@ -30,5 +34,11 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
   end
-  # meshiterro
+
+   def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      redirect_to post_images_path
+    end
+  end
 end

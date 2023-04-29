@@ -2,7 +2,7 @@
   <div class="container px-5 px-sm-0">
     <div class="row">
       <div class="col-md-3">
-        <%= render 'homes/template', book: @book, user: @user %>
+        <%= render 'homes/template', book: @books, user: @user %>
       </div>
 
 
@@ -38,7 +38,9 @@
               <% end %>
             </td>
             <td>
-              <%= link_to "Destroy", book_path(@book), method: :delete %>
+              <%= link_to book_path(@book), method: :delete, class:"btn btn-sm btn-danger" do %>
+              Destroy
+              <% end %>
 
             </td>
 
