@@ -2,48 +2,76 @@
   <div class="container px-5 px-sm-0">
     <div class="row">
       <div class="col-md-3">
-        <%= render 'homes/template', book: @books, user: @user %>
+      <h2>User info</h2>
+      <%= image_tag @user.get_profile_image(100,100) %>
+        <table class="table">
+          <tbody>
+          <tr></tr>
+          <tr>
+            <th>name</th>
+            <th><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th><%= @user.introduction %></th>
+          </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <%= link_to edit_user_path(@user.id), class:"btn btn-outline-secondary btn-block" do %>
+          <i class="fas fa-user-cog"></i>
+          <% end %>
+        </div>
+
+
+      <h2 class="mt-3">New book</h2>
+      <% if @book.errors.any? %>
+      <%= @book.errors.count %>件のエラーが発生しました
+      <ul>
+      <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+      </ul>
+      <% end %>
+
+      <%= form_with model: @book_new do |f| %>
+      <div class="form-group">
+      <h4>Title</h4>
+      <%= f.text_field :title %>
       </div>
+      <div class="form-group">
+      <h4>Opinion</h4>
+      <%= f.text_area :body %>
+      </div>
+      <div class="form-group">
+      <%= f.submit "Create Book", class:"btn btn-success" %>
+      <% end %>
+      </div>
+    </div>
 
 
-      <div class="col-8 offset-md-1">
+      <div class="col-md-8 offset-md-1">
         <h2>Book details</h2>
-        <table>
-          <thead>
-            <tr>
-            <th></th>
-            <th>Title</th>
-            <th>Opinion</th>
-            <th colspan="3"></th>
-            </tr>
-          </thead>
+        <table class="table">
         <tbody>
           <tr>
             <td>
-
-            <td>
-              <%= link_to user_path(current_user.id)do %>
-              <%= image_tag current_user.get_profile_image(100,100) %>
+              <%= link_to user_path(@user.id) do %>
+              <%= image_tag @user.get_profile_image(100,100) %>
+              <br>
+              <%= @user.name %>
               <% end %>
             </td>
             <td>
-              <%= link_to book_path(@book) do %>
+              <%= link_to book_path(@book.id) do %>
               <%= @book.title %>
               <% end %>
             </td>
             <td><%= @book.body %></td>
-            <td>
-              <%= link_to edit_book_path(@book), class:"btn btn-sm btn-success" do %>
-              Edit
+              <% if @book.user == current_user %>
+                <td><%= link_to "Edit", edit_book_path(@book.id), class:"btn btn-sm btn-success" %></td>
+                <td><%= link_to  "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-sm btn-danger" %></td>
               <% end %>
-            </td>
-            <td>
-              <%= link_to book_path(@book), method: :delete, class:"btn btn-sm btn-danger" do %>
-              Destroy
-              <% end %>
-
-            </td>
-
           </tr>
         </tbody>
         </table>
